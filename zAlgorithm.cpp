@@ -45,17 +45,21 @@ std::vector<int> ZAlgorithmSearch(const std::string& text, const std::string& pa
     return result;
 }
 
-// Función principal para ejecutar las pruebas
+// Función principal para ejecutar las pruebas con la entrada del usuario
 int main() {
-    std::vector<std::pair<std::string, std::string>> testCases = {
-        {"aaabcaabccaabcabcabcabc", "abc"},
-        {"mimamamemima", "mima"},
-        {"eseososeaseaasiasiseaseaeseoso", "sea"}
-    };
+    std::string text, pattern;
+    char continuar;
 
-    for (const auto& testCase : testCases) {
-        std::vector<int> result = ZAlgorithmSearch(testCase.first, testCase.second);
-        std::cout << "Resultados para la cadena \"" << testCase.first << "\" y subcadena \"" << testCase.second << "\":\n";
+    do {
+        std::cout << "Ingresa la cadena principal: ";
+        std::getline(std::cin, text);
+
+        std::cout << "Ingresa la subcadena a buscar: ";
+        std::getline(std::cin, pattern);
+
+        std::vector<int> result = ZAlgorithmSearch(text, pattern);
+
+        std::cout << "Resultados para la cadena \"" << text << "\" y subcadena \"" << pattern << "\":\n";
         if (result.empty()) {
             std::cout << "No se encontró la subcadena.\n";
         } else {
@@ -65,8 +69,16 @@ int main() {
             }
             std::cout << "\n";
         }
-        std::cout << "-----------------------------------\n";
-    }
 
+        std::cout << "-----------------------------------\n";
+
+        // Preguntar al usuario si quiere continuar con otro caso de prueba
+        std::cout << "¿Quieres ingresar otro caso de prueba? (s/n): ";
+        std::cin >> continuar;
+        std::cin.ignore();  // Limpiar el buffer de entrada
+
+    } while (continuar == 's' || continuar == 'S');
+
+    std::cout << "Fin del programa.\n";
     return 0;
 }
